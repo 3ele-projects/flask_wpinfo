@@ -10,8 +10,19 @@ def create_task(domain):
   #  technical_info.run()
     wp_info = Wp.WpInfo()
     wp_info.posts = wp_info.get_all_posts(domain, 'posts') 
+    wp_info.users = wp_info.get_all_posts(domain, 'users') 
+    
     wp_info.pages = wp_info.get_all_posts(domain, 'pages') 
     wp_info.login_page = wp_info.get_admin_url(domain)
+    wp_info.types = list()
+    for type in  wp_info.get_all_posts(domain, 'types')['posts']:     
+        my_type = dict()
+        my_type['name'] = type
+        my_type['content'] = wp_info.get_all_posts(domain, type)
+        wp_info.types.append(my_type)
+       
+       
+
 
     wp_info.posts['nwst'] = {}
     wp_info.posts['oldest'] = {}

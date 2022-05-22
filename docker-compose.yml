@@ -2,10 +2,10 @@ version: '3.8'
 
 services:
 
-  web:
+  api:
     build: .
-    image: web
-    container_name: web
+    image: api
+    container_name: api
     ports:
       - 5004:5000
       - 5005:5001
@@ -19,7 +19,8 @@ services:
       - redis
 
   worker:
-    image: web
+    image: api
+    build: .
     command: python manage.py run_worker
     volumes:
       - .:/usr/src/app
